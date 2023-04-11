@@ -1,6 +1,6 @@
-import React, { useRef, useState,useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useRouter } from 'next/router'
-import { IoMdEye , IoMdEyeOff , IoMdArrowDropdown } from "react-icons/io";
+import { IoMdEye, IoMdEyeOff, IoMdArrowDropdown } from "react-icons/io";
 import { useForm, Controller } from 'react-hook-form';
 import DatePicker from "react-datepicker";
 import { server } from 'config';
@@ -10,36 +10,39 @@ import bcrypt from 'bcryptjs';
 import axios from "axios";
 import Multiselect from "multiselect-react-dropdown";
 
-export async function getServerSideProps(context){
+export async function getServerSideProps(context) {
 
     const res = await fetch(`${server}/api/user/user_department`);
     const user_Department = await res.json();
-    
-    return{ props: {user_Department} }
+    console.log("user_Department", user_Department)
+    return { props: { user_Department } }
 }
 
-function SignIn({ user_Department }){
-    const { register, watch, handleSubmit, formState: { errors }, setValue, control } = useForm({mode: "onBlur"}); 
+function SignIn({ user_Department }) {
+    const { register, watch, handleSubmit, formState: { errors }, setValue, control } = useForm({ mode: "onBlur" });
     const router = useRouter();
-    
+    // let [depart, setDepart] = useState([])
     const [u_Department, setDepartment] = useState([]);
     const [p_selected, setProject] = useState([]);
-    useEffect(() =>{
-        const u_data = async() =>{
-      
-          const getDepartment = [];    
-          user_Department.map((department)=>{
-            getDepartment.push( {'label': department.department_name , 'value': department.department_name} );
-          });
-          setDepartment(getDepartment);
+
+
+    useEffect(() => {
+        // setDepart([user_Department])
+        const u_data = async () => {
+
+            const getDepartment = [];
+            user_Department.map((department) => {
+                getDepartment.push({ 'label': department.department_name, 'value': department.department_name });
+            });
+            setDepartment(getDepartment);
         }
         u_data();
-      },[]);
+    }, []);
 
     const [u_Designation, setDesignation] = useState([]);
     const [user_Designation, set_uDesignation] = useState([]);
 
-    const handleSelect = async(data) => {
+    const handleSelect = async (data) => {
 
         setProject(data);
         // fetch designation from selected department
@@ -47,9 +50,9 @@ function SignIn({ user_Department }){
         const d_Designation = designation.data;
         console.log(d_Designation);
 
-        const getDesignation = [];    
-        d_Designation.map((department)=>{
-            getDesignation.push( {'label': department.designation_name , 'value': department.designation_name} );
+        const getDesignation = [];
+        d_Designation.map((department) => {
+            getDesignation.push({ 'label': department.designation_name, 'value': department.designation_name });
         });
         setDesignation(getDesignation);
     }
@@ -69,36 +72,34 @@ function SignIn({ user_Department }){
     password.current = watch("password", "");
 
     //API call
-    const onSubmit= async(result) =>{
+    const onSubmit = async (result) => {
 
         const hashedPassword = bcrypt.hashSync(result.password, 10);
-        console.log("department");
+        console.log("department", user_Designation[0].value);
         console.log(p_selected);
 
-        const res = await fetch(`${server}/api/admin/signin/`,{
+        const res = await fetch(`${server}/api/admin/signin/`, {
             method: "POST",
-            headers: { "Content-Type": "application/json",},
-            body:JSON.stringify({role_id:result.role_id, username:result.username, password:result.password, email:result.email, PhoneNum:result.PhoneNum, department:p_selected[0].value, position:user_Designation[0].value, role:"User", status:"Active"}),
+            headers: { "Content-Type": "application/json", },
+            body: JSON.stringify({ role_id: result.role_id, username: result.username, password: result.password, email: result.email, PhoneNum: result.PhoneNum, department: p_selected[0].value, position: user_Designation[0].value, role: "User", status: "Active" }),
         })
-        const data=await res.json()
+        const data = await res.json()
 
-        if(res.status==200)
-        {
+        if (res.status == 200) {
             toast.success('SignUp Successfully !', {
                 position: "top-right",
-                autoClose:1000,
+                autoClose: 1000,
                 theme: "colored",
                 hideProgressBar: true,
                 onClose: () => router.push(`${server}/login`)
             });
             router.push("/login");
         }
-        else
-        {
+        else {
             alert("Fail")
         }
     }
-    return(
+    return (
         <>
             <style global jsx>{`html, body,div#__next{background-color: #00155c; }`}</style>
             <section className='login-section'>
@@ -108,33 +109,33 @@ function SignIn({ user_Department }){
 
 
                         <form method="POST" onSubmit={handleSubmit(onSubmit)} >
-                            
+
                             {/*<div className="form-group">
                                 <input type="file" name="avtar" onChange={(e)=>setimg(e.target.files)} {...register('avtar',  { required: "Please enter avtar" })} />
                                 <div className="error-msg">{errors.avtar && <p>{errors.avtar.message}</p>}</div> 
                             </div>*/}
 
                             <div className="form-group">
-                                <input type="hidden" className="form-control signup-input" name="role_id" value="2" {...register('role_id',  { required: "Please enter your name" })} />
+                                <input type="hidden" className="form-control signup-input" name="role_id" value="2" {...register('role_id', { required: "Please enter your name" })} />
                                 <div className="error-msg">{errors.role_id && <p>{errors.role_id.message}</p>}</div>
                             </div>
                             <div className="form-group">
-                                <input type="hidden" className="form-control signup-input" name="role" value="User" {...register('role',  { required: "Please enter your name", pattern: {value: /^[aA-zZ\s]+$/ , message: 'Only characters allow',} })} />
+                                <input type="hidden" className="form-control signup-input" name="role" value="User" {...register('role', { required: "Please enter your name", pattern: { value: /^[aA-zZ\s]+$/, message: 'Only characters allow', } })} />
                                 <div className="error-msg">{errors.role && <p>{errors.role.message}</p>}</div>
                             </div>
                             <div className="form-group">
-                                <input type="hidden" className="form-control signup-input" name="status" value="Active" {...register('status',  { required: "Please enter your name", pattern: {value: /^[aA-zZ\s]+$/ , message: 'Only characters allow',} })} />
+                                <input type="hidden" className="form-control signup-input" name="status" value="Active" {...register('status', { required: "Please enter your name", pattern: { value: /^[aA-zZ\s]+$/, message: 'Only characters allow', } })} />
                                 <div className="error-msg">{errors.status && <p>{errors.status.message}</p>}</div>
                             </div>
 
                             <div className="form-group">
                                 <label htmlFor="username" className='form-label label' >Name</label>
-                                <input type="text" className="form-control signup-input" name="username" placeholder="Enter your name" {...register('username',  { required: "Please enter your name", pattern: {value: /^[aA-zZ\s]+$/ , message: 'Only characters allow',} })} />
+                                <input type="text" className="form-control signup-input" name="username" placeholder="Enter your name" {...register('username', { required: "Please enter your name", pattern: { value: /^[aA-zZ\s]+$/, message: 'Only characters allow', } })} />
                                 <div className="error-msg">{errors.username && <p>{errors.username.message}</p>}</div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="email" className='form-label label' >Email</label>
-                                <input type="text" className="form-control signup-input" name="email" placeholder="Email@syndelltech.in" {...register('email', { required: 'Please enter your email', pattern: {value: /^[a-zA-Z0-9+_.-]+@+syndelltech+.+[A-z]$/ , message: 'Please enter a valid email ex:email@syndelltech.in',},} )} />
+                                <input type="text" className="form-control signup-input" name="email" placeholder="Email@syndelltech.in" {...register('email', { required: 'Please enter your email', pattern: { value: /^[a-zA-Z0-9+_.-]+@+syndelltech+.+[A-z]$/, message: 'Please enter a valid email ex:email@syndelltech.in', }, })} />
                                 <div className="error-msg">{errors.email && <p>{errors.email.message}</p>}</div>
                             </div>
                             <div className="form-group">
@@ -148,7 +149,7 @@ function SignIn({ user_Department }){
                                     render={({ field: { onChange, value } }) => (
                                         <PhoneInput
                                             className="form-control signup-input"
-                                            {...register('PhoneNum',  { required: "Please enter your phone number", message: 'Only Numbers allow', })} 
+                                            {...register('PhoneNum', { required: "Please enter your phone number", message: 'Only Numbers allow', })}
                                             defaultCountry={"IN"}
                                             maxLength={11}
                                             placeholder="Enter phone number"
@@ -181,20 +182,20 @@ function SignIn({ user_Department }){
 
                             <div className="form-group">
                                 <label htmlFor="password" className='form-label label' >Password</label>
-                                <input type={isRevealPwd ? 'text' : 'password'} name="password" placeholder="Enter your password" className="form-control signup-input" {...register('password', { required: "Please enter your password",minLength: {value: 8, message: "Password must have at least 8 characters" }, pattern: {value: /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/, message: 'must include lower, upper, number, and special chars',} })}  />
-                                <span className='icon-eyes' onClick={() => setIsRevealPwd((prevState) => !prevState)} >{isRevealPwd ? <IoMdEyeOff /> : <IoMdEye/>}</span>
+                                <input type={isRevealPwd ? 'text' : 'password'} name="password" placeholder="Enter your password" className="form-control signup-input" {...register('password', { required: "Please enter your password", minLength: { value: 8, message: "Password must have at least 8 characters" }, pattern: { value: /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/, message: 'must include lower, upper, number, and special chars', } })} />
+                                <span className='icon-eyes' onClick={() => setIsRevealPwd((prevState) => !prevState)} >{isRevealPwd ? <IoMdEyeOff /> : <IoMdEye />}</span>
                                 <div className="error-msg">{errors.password && <p>{errors.password.message}</p>}</div>
                             </div>
 
                             <div className="form-group">
                                 <label htmlFor="confirm-pwd" className='form-label label'>Confirm Password</label>
-                                <input type={isRevealconPwd ? 'text' : 'password'} className="form-control signup-input" placeholder="Confirm your password" {...register('confirmPwd', {  validate: value =>value === password.current || "The passwords do not match" })}  />
-                                <span className='icon-eyes' onClick={() => setIsRevealconPwd((prevState) => !prevState)}>{isRevealconPwd ? <IoMdEyeOff /> : <IoMdEye/>}</span>
+                                <input type={isRevealconPwd ? 'text' : 'password'} className="form-control signup-input" placeholder="Confirm your password" {...register('confirmPwd', { validate: value => value === password.current || "The passwords do not match" })} />
+                                <span className='icon-eyes' onClick={() => setIsRevealconPwd((prevState) => !prevState)}>{isRevealconPwd ? <IoMdEyeOff /> : <IoMdEye />}</span>
                                 <div className="error-msg">{errors.confirmPwd && <p>{errors.confirmPwd.message}</p>}</div>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="Department" className='form-label label' >Department</label><br/>
+                                <label htmlFor="Department" className='form-label label' >Department</label><br />
 
                                 <Multiselect
                                     displayValue="value"
@@ -203,19 +204,19 @@ function SignIn({ user_Department }){
                                     selectionLimit="1"
                                     onChange={handleSelect}
                                     onRemove={handleSelect}
-                                    onSearch={function noRefCheck(){}}
+                                    onSearch={function noRefCheck() { }}
                                     onSelect={handleSelect}
                                     placeholder="Select User Department"
                                     showArrow={true}
                                 /><br />
-                                
+
                                 {/* <span className='icon-eyes'><IoMdArrowDropdown /></span> */}
                                 <div className="error-msg">{errors.department && <p>{errors.department.message}</p>}</div>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="position" className='form-label label' >Position</label><br/>
-                                
+                                <label htmlFor="position" className='form-label label' >Position</label><br />
+
                                 <Multiselect
                                     displayValue="value"
                                     options={u_Designation}
@@ -223,7 +224,7 @@ function SignIn({ user_Department }){
                                     selectionLimit="1"
                                     onChange={set_uDesignation}
                                     onRemove={set_uDesignation}
-                                    onSearch={function noRefCheck(){}}
+                                    onSearch={function noRefCheck() { }}
                                     onSelect={set_uDesignation}
                                     placeholder="User Designation"
                                     showArrow={true}
@@ -236,7 +237,7 @@ function SignIn({ user_Department }){
 
                             <div className='login-btn'>
                                 <button type="submit" className="login-create-acc-btn" >Create Account</button>
-                            </div>  
+                            </div>
                             <div className='login-text'>
                                 <div><p>Already have an Account? </p></div>
                                 <div><p><a href='/login'><span className='signup-text-login'>Login</span></a></p></div>
@@ -245,10 +246,10 @@ function SignIn({ user_Department }){
                     </div>
                 </div>
             </section>
-            <ToastContainer limit={1}/>
+            <ToastContainer limit={1} />
 
         </>
     )
-} 
+}
 
 export default SignIn
