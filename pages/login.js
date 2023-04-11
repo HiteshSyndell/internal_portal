@@ -5,7 +5,7 @@ import { useState } from "react";
 import { IoMdEye, IoMdEyeOff, IoMdMail } from "react-icons/io";
 import { server } from 'config';
 import { useForm, Controller } from 'react-hook-form';
-import { useCookies } from 'react-cookie';
+import { setCookie } from 'cookies-next';
 import { ToastContainer, toast } from 'react-toastify';
 import bcrypt from 'bcryptjs'
 import axios from 'axios';
@@ -13,7 +13,7 @@ import axios from 'axios';
 export default function home() {
 
     const { register, watch, handleSubmit, formState: { errors }, setValue, control } = useForm({ mode: "onBlur" });
-    const [cookies, setCookie] = useCookies(['name']);
+    // const [cookies, setCookie] = useCookies(['name']);
 
     const avtar = [];
     console.log('avtar', avtar)
@@ -56,6 +56,7 @@ export default function home() {
 
             if (result) {
                 console.log("success");
+
                 setCookie('name', data[0].username, { path: '/', sameSite: true, });
                 setCookie('Id', data[0].id, { path: '/', sameSite: true, });
                 setCookie('Role_id', data[0].role_id, { path: '/', sameSite: true, });
