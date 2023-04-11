@@ -26,6 +26,7 @@ import { useCookies } from 'react-cookie';
 import axios from "axios";
 import dynamic from "next/dynamic";
 import AvatarGroup from 'react-avatar-group';
+import Link from "next/link";
 // import Avatar from '@mui/material/Avatar';
 // import AvatarGroup from '@mui/material/AvatarGroup';
 
@@ -117,28 +118,29 @@ export async function getServerSideProps(context){
   // All departments list for filter
   const department = await fetch(`${server}/api/user/user_department`);
   const user_Department = await department.json();
-
+  
   // All languages list for filter
   const lang = await fetch(`${server}/api/language`)
   const language = await lang.json();
-
+  
   // All department options for dropdown
   const lang_department = await fetch(`${server}/api/languageDepartment`)
   const languageDepartment = await lang_department.json();
-
+  
   // All priority options for dropdown
   const pri = await fetch(`${server}/api/priority`)
   const priority = await pri.json();
-
+  
   // All status options for dropdown
   const stat = await fetch(`${server}/api/projectStatus`)
   const status = await stat.json();
-
+  
   return{ props: { project_details, user_project, User_name, language, user_Department, languageDepartment, priority, status } }
 }
 
 function Dashboard( { project_details, user_project, User_name, language, user_Department, languageDepartment, priority, status } ) {
-
+  
+  console.log("Department",user_Department);
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
@@ -979,7 +981,7 @@ console.log(dateDetails.length);
                   {user_Department.map((department)=>{
                     return(
                       <span>
-                        <a href={`${server}/project_department/${department.department_name}`}>{department.department_name}</a>
+                        <Link href={`${server}/project_department/${department.department_name}`}>{department.department_name}</Link>
                       </span>
                     )                      
                   }

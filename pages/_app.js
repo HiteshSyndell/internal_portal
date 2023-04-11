@@ -15,13 +15,13 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React  from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
 import { useRouter } from 'next/router';
-import { useState,useEffect  } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 
@@ -38,7 +38,7 @@ import { CookiesProvider } from 'react-cookie';
 import 'react-quill/dist/quill.snow.css';
 import "react-quill/dist/quill.bubble.css";
 
-import {Alert} from "components/Alert.jsx";
+import { Alert } from "components/Alert.jsx";
 import { getCookie } from "cookies-next";
 
 Router.events.on("routeChangeStart", (url) => {
@@ -58,17 +58,17 @@ Router.events.on("routeChangeError", () => {
   document.body.classList.remove("body-page-transition");
 });
 
-function Loading(){
+function Loading() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  console.log('loading',loading)
-  useEffect(()=>{
+  console.log('loading', loading)
+  useEffect(() => {
     const handleStart = (url) => (url !== router.asPath) && setLoading(true);
-    const handleComplete = (url) => (url === router.asPath) && setTimeout(() =>{setLoading(false)},2000);
+    const handleComplete = (url) => (url === router.asPath) && setTimeout(() => { setLoading(false) }, 2000);
 
     router.events.on('routeChangeStart', handleStart)
     router.events.on('routeChangeComplete', handleComplete)
-    router.events.on('routeChangeError',  handleComplete)
+    router.events.on('routeChangeError', handleComplete)
 
     return () => {
       router.events.off('routeChangeStart', handleStart)
@@ -85,19 +85,19 @@ function Loading(){
 function MyApp({ Component, pageProps }) {
   const Layout = Component.layout || (({ children }) => <>{children}</>);
   const router = useRouter();
-  let getData=getCookie("name")
-  useEffect(()=>{
-    if(getData){
+  let getData = getCookie("name")
+  useEffect(() => {
+    if (getData) {
       router.push("/dashboard")
     }
-    else{
+    else {
       router.push("/login")
     }
-  },[getData])
-  
+  }, [])
+
   return (
-    <>  
-      <Loading />    
+    <>
+      <Loading />
       <React.Fragment>
         <Head>
           <meta
@@ -107,15 +107,15 @@ function MyApp({ Component, pageProps }) {
           <title>Automation Tool</title>
           <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
         </Head>
-          <body>
-            <Layout>
-              <CookiesProvider>
-                <Alert />
-                <Component {...pageProps} />
-              </CookiesProvider>
-            </Layout>
-          </body>
-      </React.Fragment> 
+        <body>
+          <Layout>
+            <CookiesProvider>
+              <Alert />
+              <Component {...pageProps} />
+            </CookiesProvider>
+          </Layout>
+        </body>
+      </React.Fragment>
     </>
   )
 }
