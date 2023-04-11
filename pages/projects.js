@@ -997,7 +997,7 @@ console.log(dateDetails.length);
                     {language.map((language)=>{
                       return(
                         <span>
-                          <a href={`${server}/project_language/${language.language_name}`}>{language.language_name}</a>
+                          <Link href={`${server}/project_language/${language.language_name}`}>{language.language_name}</Link>
                         </span>
                       )
                     }

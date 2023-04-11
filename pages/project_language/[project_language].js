@@ -133,7 +133,8 @@ function ProjectFilter({ project_details, User_name }) {
         console.log(data);
         if (res.status == 200) {
             // alert("success");
-            router.push(`${server}/admin/project_module`);
+            // router.push(`${server}/admin/project_module`);
+            router.push(`/projects`)
         }
         else {
             alert("Fail");
