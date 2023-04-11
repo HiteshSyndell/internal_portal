@@ -39,6 +39,7 @@ import 'react-quill/dist/quill.snow.css';
 import "react-quill/dist/quill.bubble.css";
 
 import {Alert} from "components/Alert.jsx";
+import { getCookie } from "cookies-next";
 
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
@@ -83,6 +84,17 @@ function Loading(){
 }
 function MyApp({ Component, pageProps }) {
   const Layout = Component.layout || (({ children }) => <>{children}</>);
+  const router = useRouter();
+  let getData=getCookie("name")
+  useEffect(()=>{
+    if(getData){
+      router.push("/dashboard")
+    }
+    else{
+      router.push("/login")
+    }
+  },[getData])
+  
   return (
     <>  
       <Loading />    
