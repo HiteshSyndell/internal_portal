@@ -27,10 +27,11 @@ import { server } from 'config';
 import { useCookies } from 'react-cookie';
 
 import AvatarGroup from 'react-avatar-group';
+import Link from "next/link";
 
-export default function AdminNavbarLinks({useravtar}) {
+export default function AdminNavbarLinks({ useravtar }) {
 
-  
+
   // useEffect(async() => {
   //   const res = await fetch(`${server}/api/admin/${cookies.Id}`)
   //   const useravtar=await res.json()
@@ -49,27 +50,27 @@ export default function AdminNavbarLinks({useravtar}) {
   // console.log(users)
 
   const router = useRouter();
-  const [cookies, setCookie, removeCookie ] = useCookies();
+  const [cookies, setCookie, removeCookie] = useCookies();
 
-  const profile_avtar=[];
+  const profile_avtar = [];
   profile_avtar.push(cookies.name)
   console.log('profile_avtar', profile_avtar)
 
   const logoutfunc = () => {
-    removeCookie('name', { path:'/' } );
-    removeCookie('Email', { path:'/' } );
-    removeCookie('Mobile_num', { path:'/' } );
-    removeCookie('DOB', { path:'/' } );
-    removeCookie('Department', { path:'/' } );
-    removeCookie('Position', { path:'/' } );
-    removeCookie('Role', { path:'/' } );
-    removeCookie('Avtar', { path:'/' } );
-    removeCookie('Id', { path:'/' } );
-    removeCookie('Role_id', { path:'/' } );
+    removeCookie('name', { path: '/' });
+    removeCookie('Email', { path: '/' });
+    removeCookie('Mobile_num', { path: '/' });
+    removeCookie('DOB', { path: '/' });
+    removeCookie('Department', { path: '/' });
+    removeCookie('Position', { path: '/' });
+    removeCookie('Role', { path: '/' });
+    removeCookie('Avtar', { path: '/' });
+    removeCookie('Id', { path: '/' });
+    removeCookie('Role_id', { path: '/' });
 
     router.push("/login");
   }
- 
+
 
 
   const size = useWindowSize();
@@ -115,7 +116,7 @@ export default function AdminNavbarLinks({useravtar}) {
           <Search />
         </Button>
         </div>*/}
-        
+
       {/* <Button
         color={size.width > 959 ? "transparent" : "white"}
         justIcon={size.width > 959}
@@ -205,9 +206,9 @@ export default function AdminNavbarLinks({useravtar}) {
             </Grow>
           )}
             </Poppers> */}
-        </div>
+      </div>
       <div className={classes.manager}>
-      
+
         <Button
           color={size.width > 959 ? "transparent" : "white"}
           justIcon={size.width > 959}
@@ -215,7 +216,7 @@ export default function AdminNavbarLinks({useravtar}) {
           aria-owns={openProfile ? "profile-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickProfile}
-          className={classes.buttonLink}  
+          className={classes.buttonLink}
         >
           <Person className={classes.icons} />
           {/* <AvatarGroup
@@ -254,18 +255,18 @@ export default function AdminNavbarLinks({useravtar}) {
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu" className="logout">
                     {
-                    <MenuItem onClick={handleCloseProfile} className={classes.dropdownItem}>
-                      <a href="/profile_page">My Profile{/*cookies.name*/}</a>
-                    </MenuItem>
-                    /*
-                    <MenuItem onClick={handleCloseProfile} className={classes.dropdownItem}>
-                      <a href="#">Settings</a>
-                    </MenuItem>
-                    */
+                      <MenuItem onClick={handleCloseProfile} className={classes.dropdownItem}>
+                        <Link href="/profile_page">My Profile</Link>
+                      </MenuItem>
+                      /*
+                      <MenuItem onClick={handleCloseProfile} className={classes.dropdownItem}>
+                        <a href="#">Settings</a>
+                      </MenuItem>
+                      */
                     }
                     <Divider light />
                     <MenuItem /*onClick={handleCloseProfile}*/ onClick={logoutfunc} className={classes.dropdownItem}>
-                      <a href="#">Logout</a>
+                      <Link href="/login">Logout</Link>
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
@@ -273,7 +274,7 @@ export default function AdminNavbarLinks({useravtar}) {
             </Grow>
           )}
         </Poppers>
-      
+
       </div>
     </div>
   );

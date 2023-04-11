@@ -31,6 +31,7 @@ import { MdDelete } from 'react-icons/md';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 // import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // import Accordion from "@material-ui/core/Accordion";
@@ -423,7 +424,8 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
             hideProgressBar: true,
           });
         }
-        router.reload(`${server}/tasks`);
+        // router.reload(`${server}/tasks`);
+        router.push("/tasks")
       }
       else {
         alert("Fail");
@@ -942,7 +944,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                           </CardBody>
 
                           <CardFooter>
-                            <Button color="primary" type="submit">Add Task</Button>
+                            <Button color="success" type="submit">Add Task</Button>
                             <Button className="button" onClick={() => { close(); }}> Cancel </Button>
                           </CardFooter>
 
@@ -965,7 +967,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                 {user_Department.map((department) => {
                   return (
                     <span>
-                      <a href={`${server}/project_department/${department.department_name}`}>{department.department_name}</a>
+                      <Link href={`${server}/project_department/${department.department_name}`}>{department.department_name}</Link>
                     </span>
                   )
                 }
@@ -981,7 +983,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                 {language.map((language) => {
                   return (
                     <span>
-                      <a href={`${server}/project_language/${language.language_name}`}>{language.language_name}</a>
+                      <Link href={`${server}/project_language/${language.language_name}`}>{language.language_name}</Link>
                     </span>
                   )
                 }
