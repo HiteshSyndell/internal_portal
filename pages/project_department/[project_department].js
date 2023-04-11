@@ -28,6 +28,7 @@ import { FiEdit } from "react-icons/fi";
 import { MdDelete } from 'react-icons/md';
 import { useCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
+import axios from "axios";
 
 const styles = {
     cardCategoryWhite: {
@@ -127,24 +128,31 @@ function ProjectFilter({ project_details, User_name, language, user_Department }
     //Add Project
     const onSubmit = async (result) => {
 
-        console.log("result");
-        console.log(result);
+        const res = await axios.post(`${server}/api/project/addproject`,
+            { project_department: result.project_department, project_status: result.project_status, project_title: result.project_title, project_description: result.project_description, project_language: result.project_language, project_comment: result.project_comment, project_priority: result.project_priority, project_start: result.start, project_end: result.end }),
 
-        const res = await fetch(`${server}/api/project/addproject`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ project_department: result.project_department, project_status: result.project_status, project_title: result.project_title, project_description: result.project_description, project_language: result.project_language, project_comment: result.project_comment, project_priority: result.project_priority, project_start: result.start, project_end: result.end }),
-        })
-        const data = await res.json()
-        console.log("data");
-        console.log(data);
-        if (res.status == 200) {
+
+             data = await res.data
+        console.log("data", 
+        { project_department: result.project_department, project_status: result.project_status, project_title: result.project_title, project_description: result.project_description, project_language: result.project_language, project_comment: result.project_comment, project_priority: result.project_priority, project_start: result.start, project_end: result.end }
+        );
+        router.push(`/projects`);
+        // console.log(data);
+        if (res.status === 200) {
             // alert("success");
-            router.push(`/projects`);
         }
         else {
             alert("Fail");
         }
+        // console.log("result");
+        // console.log(result);
+
+        // const res = await fetch(`${server}/api/project/addproject`, {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify({ project_department: result.project_department, project_status: result.project_status, project_title: result.project_title, project_description: result.project_description, project_language: result.project_language, project_comment: result.project_comment, project_priority: result.project_priority, project_start: result.start, project_end: result.end }),
+        // })
+
     }
     //Update Project
     const [uoption, setUpdate] = React.useState({
@@ -441,7 +449,7 @@ function ProjectFilter({ project_details, User_name, language, user_Department }
                                                         </GridContainer>
                                                     </CardBody>
                                                     <CardFooter>
-                                                        <Button color="primary" type="submit">Add Project</Button>
+                                                        <Button color="success" type="submit">Add Project</Button>
                                                         <Button className="button" onClick={() => { close(); }}> Cancel </Button>
                                                     </CardFooter>
                                                 </Card>
