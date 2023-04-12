@@ -415,6 +415,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
       })
 
       if (res.status == 200) {
+        router.push("/tasks")
         // alert("success");
         if (!toast.isActive(toastId.current)) {
           toastId.current = toast.success('Task added Successfully!🎉', {
@@ -425,7 +426,6 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
           });
         }
         // router.reload(`${server}/tasks`);
-        router.push("/tasks")
       }
       else {
         alert("Fail");

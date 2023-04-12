@@ -29,7 +29,7 @@ import { MdDelete } from 'react-icons/md';
 import { useCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
-
+import Link from "next/link"; 
 const styles = {
     cardCategoryWhite: {
         color: "rgba(0,0,0,.62)",
@@ -136,9 +136,9 @@ function ProjectFilter({ project_details, User_name, language, user_Department }
         console.log("data", 
         { project_department: result.project_department, project_status: result.project_status, project_title: result.project_title, project_description: result.project_description, project_language: result.project_language, project_comment: result.project_comment, project_priority: result.project_priority, project_start: result.start, project_end: result.end }
         );
-        router.push(`/projects`);
         // console.log(data);
         if (res.status === 200) {
+            router.push(`/projects`);
             // alert("success");
         }
         else {
@@ -468,7 +468,7 @@ function ProjectFilter({ project_details, User_name, language, user_Department }
                                 {user_Department.map((department) => {
                                     return (
                                         <span>
-                                            <a href={`${server}/project_department/${department.department_name}`}>{department.department_name}</a>
+                                            <Link href={`${server}/project_department/${department.department_name}`}>{department.department_name}</Link>
                                         </span>
                                     )
                                 }
@@ -484,7 +484,7 @@ function ProjectFilter({ project_details, User_name, language, user_Department }
                                 {language.map((language) => {
                                     return (
                                         <span>
-                                            <a href={`${server}/project_language/${language.language_name}`}>{language.language_name}</a>
+                                            <Link href={`${server}/project_language/${language.language_name}`}>{language.language_name}</Link>
                                         </span>
                                     )
                                 }

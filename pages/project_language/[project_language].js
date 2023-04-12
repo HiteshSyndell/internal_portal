@@ -28,6 +28,7 @@ import { FiEdit } from "react-icons/fi";
 import { MdDelete } from 'react-icons/md';
 import { useCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
+import Link from "next/link";
 
 const styles = {
     cardCategoryWhite: {
@@ -89,7 +90,7 @@ export async function getServerSideProps(context) {
 
     const res = await fetch(`${server}/api/project/project_language/${project_language}`);
     const project_details = await res.json();
-    // console.log(project_details);
+    console.log("project details", project_details);
     const response = await fetch(`${server}/api/admin`)
     const User_name = await response.json();
 
@@ -97,7 +98,7 @@ export async function getServerSideProps(context) {
 }
 
 function ProjectFilter({ project_details, User_name }) {
-    console.log("project_details",project_details)
+    console.log("project_details", project_details)
 
     const useStyles = makeStyles(styles);
     const classes = useStyles();
@@ -450,10 +451,10 @@ function ProjectFilter({ project_details, User_name }) {
                         <div className="department_dropdown">
                             <button className="dropdown_button">Project Departments</button>
                             <div className="department-link">
-                                       {/* {project_department.map((department) => {
+                                {/* {project_department.map((department) => {
                                     return (
                                         <span>
-                                            <a href={`${server}/project_department/${department.department_name}`}>{department.department_name}</a>
+                                            <Link href={`${server}/project_department/${department.department_name}`}>{department.department_name}</Link>
                                         </span>
                                     )
                                 }
@@ -466,14 +467,14 @@ function ProjectFilter({ project_details, User_name }) {
                         <div className="department_dropdown">
                             <button className="dropdown_button">Project Languages</button>
                             <div className="department-link">
-                                {/* {language.map((language) => {
+                                {project_details.map((language) => {
                                     return (
                                         <span>
-                                            <a href={`${server}/project_language/${language.language_name}`}>{language.language_name}</a>
+                                            <a href={`${server}/${language.language_name}`}>{language.language_name}</a>
                                         </span>
                                     )
                                 }
-                                )} */}
+                                )}
                             </div>
                         </div>
                     </GridItem>
