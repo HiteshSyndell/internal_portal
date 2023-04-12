@@ -636,7 +636,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
   //for Time Declration
 
   const [Time, setTime] = useState([]);
-  console.log(Time)
+  console.log("time", Time)
 
   const [TimeData, setTimeData] = useState([])
   const [dropdown_Comments, setDropdownComments] = useState([]);
@@ -650,7 +650,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
     console.log("task id");
     setDropdownComments(comment_Data.data);
   }
-  console.log(TimeData)
+  console.log("time data", TimeData)
   const [userdata, setuserdata] = useState({
     estimate_time: "",
     spent_time: ""
