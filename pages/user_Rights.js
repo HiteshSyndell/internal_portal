@@ -106,9 +106,9 @@ function UserRights({ UserList, ModuleList }) {
             var result = 0
         }
         console.log("result", result)
-        let data = axios.put(`${server}/api/rights/project/${project_id}`, { userid: user, moduleid: module, projectid: project_id, view: result })
+        axios.put(`${server}/api/rights/project/${project_id}`, { userid: user, moduleid: module, projectid: project_id, view: result })
         // console.log(data)
-        router.reload(`${server}/user_Rights`);
+        // router.reload(`${server}/user_Rights`);
     }
     const edit_rights = (project_id, edit_rights) => {
         if (edit_rights == 0) {
@@ -118,9 +118,9 @@ function UserRights({ UserList, ModuleList }) {
             var result = 0
         }
         console.log("result", result)
-        let data = axios.put(`${server}/api/rights/project/${project_id}`, { userid: user, moduleid: module, projectid: project_id, edit: result })
+        axios.put(`${server}/api/rights/project/${project_id}`, { userid: user, moduleid: module, projectid: project_id, edit: result })
         // console.log(data)
-        router.reload(`${server}/user_Rights`);
+        // router.reload(`${server}/use r_Rights`);
     }
 
 
