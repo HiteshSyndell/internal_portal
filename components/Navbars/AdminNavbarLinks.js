@@ -210,20 +210,21 @@ export default function AdminNavbarLinks({ useravtar }) {
       <div className={classes.manager}>
 
         <Button
-          color={size.width > 959 ? "transparent" : "white"}
+          // color={size.width > 959 ? "transparent" : "white"}
           justIcon={size.width > 959}
           simple={!(size.width > 959)}
           aria-owns={openProfile ? "profile-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickProfile}
           className={classes.buttonLink}
+          style={{ color: "blue", fontSize: '30px', borderRadius: '50%' }}
         >
           <Person className={classes.icons} />
           {/* <AvatarGroup
             avatars={['Ahdf']}
             initialCharacters={1}
             max={2}
-            size={40}
+            size={20}
             displayAllOnHover
             shadow={2}
           ></AvatarGroup> */}

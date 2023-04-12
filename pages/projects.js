@@ -1158,7 +1158,7 @@ function Dashboard({ project_details, user_project, User_name, language, user_De
                             </td>
                             <td className="project-edit-table">
                               {/* Edit popUp Start*/}
-                              <Popup trigger={<a className="icon-edit-delete"><div className='icon-width' onClick={() => { projectId(project.project_id), getData(project.project_id) }}><FiEdit /></div></a>} className="popupReact" modal nested>
+                              <Popup trigger={<a className="icon-edit-delete"><div className='icon-width' onClick={() => { projectId(project.project_id), getData(project.project_id) }}><FiEdit style={{ color: 'green', fontSize: '30px' }} /></div></a>} className="popupReact" modal nested>
                                 {close => (
                                   <div className="popup-align">
                                     <GridContainer>
@@ -1438,7 +1438,7 @@ function Dashboard({ project_details, user_project, User_name, language, user_De
                               </Popup>
                               {/*Edit popup End*/}
                               {/*Delete popUp Start*/}
-                              <Popup trigger={<div className="icon-edit-delete" hidden={cookies.Role_id == "2"}><MdDelete /></div>} modal>
+                              <Popup trigger={<div className="icon-edit-delete" hidden={cookies.Role_id == "2"}><MdDelete style={{ color: 'red', fontSize: '30px' }} /></div>} modal>
                                 {close => (
                                   <div>
                                     <Card>
@@ -1448,7 +1448,7 @@ function Dashboard({ project_details, user_project, User_name, language, user_De
                                             <GridItem>
                                               <div className="delete_popup">
                                                 <CardBody>
-                                                  <MdDelete className="delete_popup_image" />
+                                                  <MdDelete className="delete_popup_image" style={{ color: 'red', fontSize: '30px' }}  />
                                                   <h2 className="delete_popup">Delete {project.project_title}</h2>
                                                   <h4 className={classes.cardTitleWhite}>Are you sure you want to delete {project.project_title}?</h4>
                                                 </CardBody>
@@ -1582,7 +1582,7 @@ function Dashboard({ project_details, user_project, User_name, language, user_De
                             </td>
                             <td>
                               {/* Edit popUp Start*/}
-                              <Popup trigger={<a className="icon-edit-delete"><div className='icon-width' onClick={() => { projectId(project.project_id), getData(project.project_id) }}><FiEdit /></div></a>} className="popupReact" modal nested>
+                              <Popup trigger={<a className="icon-edit-delete"><div className='icon-width' onClick={() => { projectId(project.project_id), getData(project.project_id) }}><FiEdit  style={{ color: 'green', fontSize: '30px' }}/></div></a>} className="popupReact" modal nested>
                                 {close => (
                                   <div className="popup-align">
                                     <GridContainer>
@@ -1864,7 +1864,7 @@ function Dashboard({ project_details, user_project, User_name, language, user_De
                               </Popup>
                               {/*Edit popup End*/}
                               {/*Delete popUp Start*/}
-                              <Popup trigger={<div className="icon-edit-delete" hidden={cookies.Role_id == "2"}><MdDelete /></div>} modal>
+                              <Popup trigger={<div className="icon-edit-delete" hidden={cookies.Role_id == "2"}><MdDelete style={{ color: 'red', fontSize: '30px' }} /></div>} modal>
                                 {close => (
                                   <div>
                                     <Card>
@@ -1874,7 +1874,7 @@ function Dashboard({ project_details, user_project, User_name, language, user_De
                                             <GridItem>
                                               <div className="delete_popup">
                                                 <CardBody>
-                                                  <MdDelete className="delete_popup_image" />
+                                                  <MdDelete className="delete_popup_image"style={{ color: 'red', fontSize: '30px' }}  />
                                                   <h2 className="delete_popup">Delete {project.project_title}</h2>
                                                   <h4 className={classes.cardTitleWhite}>Are you sure you want to delete {project.project_title}?</h4>
                                                 </CardBody>
@@ -2008,7 +2008,7 @@ function Dashboard({ project_details, user_project, User_name, language, user_De
                             </td>
                             <td>
                               {/* Edit popUp Start*/}
-                              <Popup trigger={<a className="icon-edit-delete"><div className='icon-width' onClick={() => { projectId(project.project_id), getData(project.project_id) }}><FiEdit /></div></a>} className="popupReact" modal nested>
+                              <Popup trigger={<a className="icon-edit-delete"><div className='icon-width' onClick={() => { projectId(project.project_id), getData(project.project_id) }}><FiEdit  style={{ color: 'green', fontSize: '30px' }}/></div></a>} className="popupReact" modal nested>
                                 {close => (
                                   <div className="popup-align">
                                     <GridContainer>
@@ -2300,7 +2300,7 @@ function Dashboard({ project_details, user_project, User_name, language, user_De
                               </Popup>
                               {/*Edit popup End*/}
                               {/*Delete popUp Start*/}
-                              <Popup trigger={<div className="icon-edit-delete" hidden={cookies.Role_id == "2"}><MdDelete /></div>} modal>
+                              <Popup trigger={<div className="icon-edit-delete" hidden={cookies.Role_id == "2"}><MdDelete style={{ color: 'red', fontSize: '30px' }} /></div>} modal>
                                 {close => (
                                   <div>
                                     <Card>
@@ -2310,7 +2310,7 @@ function Dashboard({ project_details, user_project, User_name, language, user_De
                                             <GridItem>
                                               <div className="delete_popup">
                                                 <CardBody>
-                                                  <MdDelete className="delete_popup_image" />
+                                                  <MdDelete className="delete_popup_image"style={{ color: 'red', fontSize: '30px' }}  />
                                                   <h2 className="delete_popup">Delete {project.project_title}</h2>
                                                   <h4 className={classes.cardTitleWhite}>Are you sure you want to delete {project.project_title}?</h4>
                                                 </CardBody>

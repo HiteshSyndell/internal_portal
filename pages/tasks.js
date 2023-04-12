@@ -1144,7 +1144,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                           </td>
 
                           <td className="project-edit-table">
-                            <Popup trigger={<div><a className="bttn-design1" onClick={() => { projectId(task.task_id) }}><FiEdit /></a></div>} className="popupReact" modal nested>
+                            <Popup trigger={<div><a className="bttn-design1" onClick={() => { projectId(task.task_id) }}><FiEdit style={{ color: 'green', fontSize: '30px' }} /></a></div>} className="popupReact" modal nested>
                               {close => (
                                 <div>
                                   <GridContainer>
@@ -1506,7 +1506,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                               )}
                             </Popup>
 
-                            <Popup trigger={<div hidden={cookies.Role_id == "2"}><MdDelete /></div>} modal >
+                            <Popup trigger={<div hidden={cookies.Role_id == "2"}><MdDelete style={{ color: 'red', fontSize: '30px' }} /></div>} modal >
                               {close => (
                                 <div>
                                   <Card>
@@ -1680,7 +1680,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                             </td>
 
                             <td className="project-edit-table">
-                              <Popup trigger={<div><a className="bttn-design1" onClick={() => { projectId(task.task_id) }}><FiEdit /></a></div>} className="popupReact" modal nested>
+                              <Popup trigger={<div><a className="bttn-design1" onClick={() => { projectId(task.task_id) }}><FiEdit style={{ color: 'green', fontSize: '30px' }} /></a></div>} className="popupReact" modal nested>
                                 {close => (
                                   <div>
                                     <GridContainer>
@@ -2042,7 +2042,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                                 )}
                               </Popup>
 
-                              <Popup trigger={<div hidden={cookies.Role_id == "2"}><MdDelete /></div>} modal >
+                              <Popup trigger={<div hidden={cookies.Role_id == "2"}><MdDelete style={{ color: 'red', fontSize: '30px' }} /></div>} modal >
                                 {close => (
                                   <div>
                                     <Card>
@@ -2216,7 +2216,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                             </td>
 
                             <td className="project-edit-table">
-                              <Popup trigger={<div><a className="bttn-design1" onClick={() => { projectId(task.task_id) }}><FiEdit /></a></div>} className="popupReact" modal nested>
+                              <Popup trigger={<div><a className="bttn-design1" onClick={() => { projectId(task.task_id) }}><FiEdit style={{ color: 'green', fontSize: '30px' }} /></a></div>} className="popupReact" modal nested>
                                 {close => (
                                   <div>
                                     <GridContainer>
@@ -2579,7 +2579,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                                 )}
                               </Popup>
 
-                              <Popup trigger={<div hidden={cookies.Role_id == "2"}><MdDelete /></div>} modal >
+                              <Popup trigger={<div hidden={cookies.Role_id == "2"}><MdDelete style={{ color: 'red', fontSize: '30px' }} /></div>} modal >
                                 {close => (
                                   <div>
                                     <Card>
@@ -2753,7 +2753,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                             </td>
 
                             <td className="project-edit-table">
-                              <Popup trigger={<div><a className="bttn-design1" onClick={() => { projectId(task.task_id) }}><FiEdit /></a></div>} className="popupReact" modal nested>
+                              <Popup trigger={<div><a className="bttn-design1" onClick={() => { projectId(task.task_id) }}><FiEdit style={{ color: 'green', fontSize: '30px' }} /></a></div>} className="popupReact" modal nested>
                                 {close => (
                                   <div>
                                     <GridContainer>
@@ -3124,7 +3124,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                                 )}
                               </Popup>
 
-                              <Popup trigger={<div hidden={cookies.Role_id == "2"}><MdDelete /></div>} modal >
+                              <Popup trigger={<div hidden={cookies.Role_id == "2"}><MdDelete style={{ color: 'red', fontSize: '30px' }} /></div>} modal >
                                 {close => (
                                   <div>
                                     <Card>
