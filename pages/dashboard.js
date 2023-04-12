@@ -569,7 +569,8 @@ function Dashboard({ project_details, project_hold, project_completed, project_r
                                   <td className="project-edit-table">
 
                                     {/* Edit popUp Start*/}
-                                    <Popup trigger={<a className="icon-edit-delete"><div className='icon-width' onClick={() => { projectId(project.project_id) }}><FiEdit /></div></a>} className="popupReact" modal>
+                                    <Popup trigger={<a className="icon-edit-delete"><div className='icon-width' onClick={() => { projectId(project.project_id) }}>
+                                      <FiEdit style={{ color: "green", fontSize: "30px" }} /></div></a>} className="popupReact" modal>
                                       {close => (
                                         <div className="popup-align">
                                           <GridContainer>
@@ -773,7 +774,8 @@ function Dashboard({ project_details, project_hold, project_completed, project_r
                                     </Popup>
                                     {/*Edit popup End*/}
                                     {/*Delete popUp Start*/}
-                                    <Popup trigger={<div className="icon-edit-delete archieve-icon" hidden={cookies.Role_id == "2"}><BiArchiveIn /></div>} modal>
+                                    <Popup trigger={<div className="icon-edit-delete archieve-icon" hidden={cookies.Role_id == "2"}>
+                                      <BiArchiveIn style={{ color: 'red', fontSize: "30px" }} /></div>} modal>
                                       {close => (
                                         <div>
                                           <Card>
