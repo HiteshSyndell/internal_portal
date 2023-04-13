@@ -163,7 +163,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
     console.log(id);
 
     const res = await fetch(`${server}/api/subtask/deleteTask/${id}`);
-    router.reload(`${server}/tasks`);
+    // router.reload(`${server}/tasks`);
   }
   const { register, watch, handleSubmit, formState: { errors }, setValue } = useForm();
   const [startDate, setStartDate] = useState();
@@ -367,7 +367,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
           hideProgressBar: true,
         });
       }
-      router.reload(`${server}/tasks`);
+      // router.reload(`${server}/tasks`);
     }
   }
 
@@ -477,7 +477,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
         hideProgressBar: true
       });
     }
-    router.reload(`${server}/tasks`);
+    // router.reload(`${server}/tasks`);
   }
 
   const [comments, setcomments] = useState([]);
@@ -610,7 +610,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
         hideProgressBar: true,
       });
     }
-    router.reload(`${server}/tasks`);
+    // router.reload(`${server}/tasks`);
   }
 
   const [onhold_title, setonhold_title] = useState(false);
