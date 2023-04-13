@@ -33,6 +33,13 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
+
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 // import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // import Accordion from "@material-ui/core/Accordion";
 // import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -159,8 +166,8 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
   }
 
   const deleteTask = async (id) => {
-    console.log('delete');
-    console.log(id);
+    // console.log('delete');
+    // console.log(id);
 
     const res = await fetch(`${server}/api/subtask/deleteTask/${id}`);
     // router.reload(`${server}/tasks`);
@@ -183,8 +190,8 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
   });
 
   const handleChange = ({ target: { name, value } }) => {
-    console.log("name");
-    console.log([name]);
+    // console.log("name");
+    // console.log([name]);
 
     setUpdate({ ...uoption, [name]: value });
   }
@@ -263,7 +270,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
 
     const response = await fetch(`${server}/api/subtask/${id}`)
     const update_data = await response.json();
-    console.log(update_data[0]);
+    // console.log(update_data[0]);
 
     const udata = update_data[0];
     const selectedMember = (udata.task_person).split(",");
@@ -313,8 +320,8 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
       allMember.push(updateSelected[i].value);
     }
 
-    console.log("project name");
-    console.log(p_selected);
+    // console.log("project name");
+    // console.log(p_selected);
 
     if (uoption.task_id == "" || allMember == "" || u_Status == "" || uoption.task_title == "" || uoption.task_description == "" || u_Language == "" || u_Priority == "" || startDate == "" || endDate == "") {
       if (!toast.isActive(toastId.current)) {
@@ -329,8 +336,8 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
 
     } else {
 
-      console.log("update task");
-      console.log(startDate);
+      // console.log("update task");
+      // console.log(startDate);
 
       // start date get year, month, day for database value
       var s_Date = startDate.getFullYear() + '-' + startDate.getMonth() + '-' + startDate.getDate();
@@ -377,7 +384,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
 
   const onSubmit = async (result) => {
 
-    console.log("result", result);
+    // console.log("result", result);
     // console.log(selected);
 
 
@@ -510,8 +517,8 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
           body: formData,
         });
         data = await res.json();
-        console.log(data);
-        console.log(data.files.image.newFilename);
+        // console.log(data);
+        // console.log(data.files.image.newFilename);
 
         // Save current cursor 
         const range = quillRef.current.getEditor().getSelection();
@@ -561,12 +568,12 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
   // add comments
   const sendMessage = async (task_id) => {
     const date = new Date().toLocaleString();
-    console.log("date");
-    console.log(date);
+    // console.log("date");
+    // console.log(date);
 
     var addComment = await axios.post(`${server}/api/comment/addcomment`, { username: cookies.name, message: u_Comment, task_id: task_id, created_D: date });
-    console.log(addComment)
-    console.log(cookies.name)
+    // console.log(addComment)
+    // console.log(cookies.name)
 
     if (!toast.isActive(toastId.current)) {
       toastId.current = toast.success('Comment added successfully!', {
@@ -579,22 +586,22 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
 
   }
 
-  console.log("project");
-  console.log(u_Comment);
+  // console.log("project");
+  // console.log(u_Comment);
 
   const [commentEdit, setEditComment] = useState();
 
   // comment ID API
   const editComment = async (id) => {
-    console.log("id");
-    console.log(id);
+    // console.log("id");
+    // console.log(id);
 
     var commentId = await axios.post(`${server}/api/comment/comment_id`, { comment_id: id, user: cookies.name });
-    console.log(commentId.data[0]);
+    // console.log(commentId.data[0]);
 
     if (commentId.data != "") {
       setEditComment(commentId.data[0].comment);
-      console.log(commentEdit);
+      // console.log(commentEdit);
     }
   }
 
@@ -636,7 +643,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
   //for Time Declration
 
   const [Time, setTime] = useState([]);
-  console.log("time", Time)
+  // console.log("time", Time)
 
   const [TimeData, setTimeData] = useState([])
   const [dropdown_Comments, setDropdownComments] = useState([]);
@@ -647,7 +654,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
     setTimeData(timedata.data)
 
     const comment_Data = await axios.post(`${server}/api/comment/userComments`, { task_id: task_id });
-    console.log("task id");
+    // console.log("task id");
     setDropdownComments(comment_Data.data);
   }
   console.log("time data", TimeData)
@@ -659,7 +666,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
   useEffect(() => {
     setuserdata(Time);
   }, [Time])
-  console.log("userdata", userdata)
+  // console.log("userdata", userdata)
   const handleChangePanel = ({ target: { name, value } }) => {
     setuserdata({ ...userdata, [name]: value });
   }
@@ -669,14 +676,14 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
 
   const insert_time = async (task_id) => {
     var addTime = await axios.post(`${server}/api/comment/addtasktime`, { task_id: task_id, user_id: cookies.Id, username: cookies.name, estimate: estimate, spent: spent });
-    console.log(addTime.data)
-    // router.reload(`${server}/tasks`);
+    // console.log(addTime.data)
+    router.push(`/tasks`);
   }
 
   const update_tasktime = async (task_id) => {
     var updateTime = await axios.put(`${server}/api/comment/update_tasktime`, { task_id: task_id, user_id: cookies.Id, estimate: userdata.estimate_time, spent: userdata.spent_time });
-    console.log(updateTime)
-    // router.reload(`${server}/tasks`);
+    // console.log(updateTime)
+    router.push(`/tasks`);
   }
 
   // date range
@@ -751,7 +758,24 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
     }
   }
 
+  const StyledPaper = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    maxWidth: 400,
+    color: theme.palette.text.primary,
+  }));
 
+  const message = `Truncation should be conditionally applicable on this long line of text
+   as this is a much longer line than what the container can support. `;
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
   return (
     <div>
       <div className="buttonalign" hidden={cookies.Role_id == "2"}>
@@ -1552,35 +1576,38 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                               </>
                             ) : (
                               <>
-                                <GridContainer>
-                                  <GridItem>
-                                    <input value={task.task_id} type="hidden" />
-                                    <p>Estimate Time - {userdata.estimate_time}</p>
-                                    <p>Spent Time - {userdata.spent_time} </p>
-                                  </GridItem>
-                                </GridContainer>
+                                {/* <Box sx={{ display: 'flex', direction: 'row', justifyContent: 'space-around', alignItems: 'center' }}> */}
+                                <Grid container spacing={1} columns={16} sx={{ display: 'flex', direction: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                  <Grid item xs={16}>
+                                    <Item>
+                                      <input value={task.task_id} type="hidden" />
+                                      <p>Estimate Time - {userdata.estimate_time}</p>
+                                      <p>Spent Time - {userdata.spent_time} </p>
+                                    </Item>
+                                  </Grid>
+                                  {/* </Grid> */}
+                                  {/* </Box> */}
+                                  {/* <Box sx={{ flexGrow: 2 }}></Box> */}
+                                  {/* <Grid  spacing={1} columns={16} justifyContent="flex-start" alignItems="center"> */}
+                                  {dropdown_Comments.map((dComment) => {
+                                    return (
+                                      <Grid item xs={16}>
+                                        <Item>
+                                          <Typography noWrap>
+                                            {/* <p>{dComment.username}</p> */}
+                                            <p><ReactQuill value={dComment.comment} theme="bubble" readOnly /></p>
+                                            <p>{dComment.creation_time}</p>
+                                          </Typography>
+                                        </Item>
+                                      </Grid>
+                                    )
+                                  })}
+                                </Grid>
+                                {/* </Box> */}
                               </>
                             )}
-                            {/*Time Modulule*/}
                           </p>
-                          <p>
-                            {/* display comments in dropdown */}
-                            {dropdown_Comments.map((dComment) => {
-                              return (
-                                <span>
-                                  <GridContainer>
-                                    <GridItem>
-                                      <p>{dComment.username}</p>
-                                      <p><ReactQuill value={dComment.comment} theme="bubble" readOnly /></p>
-                                      <p>{dComment.creation_time}</p>
-                                    </GridItem>
-                                  </GridContainer>
-                                </span>
-                              )
-                            })}
-                          </p>
-                          {/* display comments in dropdown */}
-                        </p>
+                        </p >
                       </>
                     )
                   }
@@ -2078,13 +2105,29 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
                             <p>
                               {TimeData.length == 0 ? (
                                 <>
-                                  <GridContainer>
+                                  {/* <GridContainer>
                                     <GridItem>
                                       <input value={task.task_id} type="hidden" />
                                       <p>Estimate Time - {estimate}</p>
                                       <p>Spent Time - {spent}</p>
                                     </GridItem>
-                                  </GridContainer>
+                                  </GridContainer> */}
+                                  <StyledPaper
+                                    sx={{
+                                      my: 1,
+                                      mx: 'auto',
+                                      p: 2,
+                                    }}
+                                  >
+                                    <Grid container wrap="nowrap" spacing={2}>
+                                      <Grid item>
+                                        <Avatar>W</Avatar>
+                                      </Grid>
+                                      <Grid item xs zeroMinWidth>
+                                        <Typography noWrap>{message}</Typography>
+                                      </Grid>
+                                    </Grid>
+                                  </StyledPaper>
                                 </>
                               ) : (
                                 <>
@@ -3212,7 +3255,7 @@ function Dashboard({ project_details, User_name, allTask, userTask, language, us
         {/* </GridItem> */}
         <ToastContainer limit={1} />
       </GridContainer>
-    </div>
+    </div >
   );
 }
 
